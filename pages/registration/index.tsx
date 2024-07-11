@@ -4,7 +4,9 @@ import React, { FormEvent } from 'react';
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-// import { Stripe } from 'stripe';
+// import "/pages/globals.css"; // Adjust the path as needed
+import 'tailwindcss/tailwind.css';
+
 
 
 // if(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
@@ -121,7 +123,7 @@ const Registration = ({ data }: Registration) => {
 
 
   return (
-    <section className='mx-auto bg-primary px-2 md:w-3/4 md:rounded-xl flex-col lg:flex items-center py-8 lg:my-10 text-center [&_i]:hidden xl:[&_i]:block [&_select]:py-2 my-10 [&_label]:text-xl xl:[&_label]:text-2xl '>
+    <section className='mx-auto bg-violet-900 px-2 md:w-3/4 md:rounded-xl flex-col lg:flex items-center py-8 lg:my-10 text-center [&_i]:hidden xl:[&_i]:block [&_select]:py-2 my-10 [&_label]:text-xl xl:[&_label]:text-2xl '>
       <h1 className='text-white text-3xl lg:text-5xl lg:pb-5'>Registration</h1>
 
       <form
@@ -382,9 +384,9 @@ const Registration = ({ data }: Registration) => {
         </div>
         <button
           role='link'
-          className='bg-white text-primary rounded-md w-3/4 mx-auto py-4 lg:w-full  md:px-2 font-bold mt-6'
+          className='bg-white text-black rounded-md w-3/4 mx-auto py-4 lg:w-full  md:px-2 font-bold mt-6'
           type='submit'
-        >I HOPE THIS WORKS 
+        >CHECKOUT
         </button>
       </form>
       
