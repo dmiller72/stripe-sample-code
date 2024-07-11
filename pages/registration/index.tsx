@@ -4,7 +4,6 @@ import React, { FormEvent } from 'react';
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-// import "/pages/globals.css"; // Adjust the path as needed
 import 'tailwindcss/tailwind.css';
 
 
