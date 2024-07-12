@@ -1,25 +1,33 @@
+// const stripe = require('stripe')(JSON.stringify((process.env.STRIPE_SECRET_KEY)));
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 export default async function handler(req, res, ) {
   if (req.method === 'POST') {
+      // const name = req.body.name;
+      // const email = req.body.email;
+      // const adults = 1;
+      // const children = 0;
+      // const babies = 0;
+      // const seniors = 1;
       const adults = req.body.adults;
       const children = req.body.children;
       const babies = req.body.babies
       const seniors = req.body.seniors
-      const arrival = req.body.arrival_date
-      const departure = req.body.departure_date
+      // const arrival = req.body.arrival_date
+      // const departure = req.body.departure_date
       
  
     try {
       // Create Checkout Sessions from body params.
       let temp;
-       if (adults > 0 &&(children === '0' || children === '') && (seniors === '0' || seniors === '') && (babies === '0' || babies === '')) {
+       if (adults > 0 && children === undefined && babies === undefined && seniors === undefined  ) {
+      //  if (adults > 0 &&(children === '0' || children === '' || children === null) && (seniors === '0' || seniors === '' || seniors === 0) && (babies === undefined || babies === '' || babies === 0)) {
          temp = await stripe.checkout.sessions.create({
            line_items: [
              {
                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-               price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+               price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
                quantity: adults,
                adjustable_quantity: {
                  enabled: true,
@@ -27,14 +35,14 @@ export default async function handler(req, res, ) {
              },
            ],
            custom_fields: [
-             {
-               key: 'name',
-               label: {
-                 type: 'custom',
-                 custom: 'Full Name',
-               },
-               type: 'text',
-             },
+             // {
+             //   key: 'name',
+             //   label: {
+             //     type: 'custom',
+             //     custom: 'Full Name',
+             //   },
+             //   type: 'text',
+             // },
              {
                key: 'arrival',
                label: {
@@ -45,17 +53,40 @@ export default async function handler(req, res, ) {
                dropdown: {
                  options: [
                    {
-                     label: arrival,
-                     value: arrival,
+                     label: 'Wednesday, Oct. 16, 2024',
+                     value: '101624',
                    },
                    {
-                     label: 'Wednesday, Oct. 17, 2024',
+                     label: 'Thursday, Oct. 17, 2024',
                      value: '101724',
+                   },
+                   {
+                     label: 'Friday, Oct. 18, 2024',
+                     value: '101824',
+                   },
+                   {
+                     label: 'Saturday, Oct. 19, 2024',
+                     value: '101924',
+                   },
+                   {
+                     label: 'Sunday, Oct. 20, 2024',
+                     value: '102024',
+                   },
+                   {
+                     label: 'Monday, Oct. 21, 2024',
+                     value: '102124',
+                   },
+                   {
+                     label: 'Tuesday, Oct. 22, 2024',
+                     value: '102224',
+                   },
+                   {
+                     label: 'Wednesday, Oct. 23, 2024',
+                     value: '102324',
                    },
                  ],
                },
              },
-
              {
                key: 'departure',
                label: {
@@ -66,8 +97,32 @@ export default async function handler(req, res, ) {
                dropdown: {
                  options: [
                    {
-                     label: departure,
-                     value: departure,
+                     label: 'Friday, Oct. 18, 2024',
+                     value: '101824',
+                   },
+                   {
+                     label: 'Saturday, Oct. 19, 2024',
+                     value: '101924',
+                   },
+                   {
+                     label: 'Sunday, Oct. 20, 2024',
+                     value: '102024',
+                   },
+                   {
+                     label: 'Monday, Oct. 21, 2024',
+                     value: '102124',
+                   },
+                   {
+                     label: 'Tuesday, Oct. 22, 2024',
+                     value: '102224',
+                   },
+                   {
+                     label: 'Wednesday, Oct. 23, 2024',
+                     value: '102324',
+                   },
+                   {
+                     label: 'Thursday, Oct. 24, 2024',
+                     value: '102424',
                    },
                    {
                      label: 'Friday, Oct. 25, 2024',
@@ -78,17 +133,19 @@ export default async function handler(req, res, ) {
              },
            ],
            mode: 'payment',
+          //  success_url: 'https://www.goshengroup.net/en/gatherings',
            success_url: `${req.headers.origin}/?success=true`,
+
            cancel_url: `${req.headers.origin}/?canceled=true`,
            automatic_tax: { enabled: false },
          });
        }  else
-    if (adults > 0 && children > 0 &&(seniors === '0' || seniors === '') && (babies === '0' || babies === '')) {
+    if (adults > 0 && children > 0 &&(seniors === undefined || seniors === '') && (babies === undefined || babies === '')) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -96,7 +153,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -104,14 +161,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -126,13 +183,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -142,6 +222,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -155,17 +259,17 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else
-    if (adults > 0 && children > 0 && babies > 0 &&(seniors === '0' || seniors === '')) {
+    if (adults > 0 && children > 0 && babies > 0 &&(seniors === undefined || seniors === '')) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -173,7 +277,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -181,7 +285,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -189,14 +293,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -211,13 +315,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -227,6 +354,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -240,7 +391,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -250,7 +401,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -258,15 +409,15 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
-            quantity: children,
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children           
+             quantity: children,
             adjustable_quantity: {
               enabled: true,
             },
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -274,7 +425,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -282,14 +433,17 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          //   text: {
+          //     value: 'Jane',
+          //   },
+          // },
           {
             key: 'arrival',
             label: {
@@ -304,8 +458,32 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
@@ -333,17 +511,17 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else
-    if (adults > 0 &&(children === '0' || children === '') && (babies === '0' || babies === '')  && seniors > 0 ) {
+    if (adults > 0 &&(children === undefined || children === '') && (babies === undefined || babies === '')  && seniors > 0 ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -352,7 +530,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -360,14 +538,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -382,13 +560,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -398,6 +599,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -411,22 +636,22 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else 
     if (
       adults > 0 &&
-      (children === '0' || children === '') &&
-      (babies === '0' || babies === '') &&
-      (seniors === '0' || seniors === '')
+      (children === undefined || children === '') &&
+      (babies === undefined || babies === '') &&
+      (seniors === undefined || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -435,7 +660,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -443,14 +668,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -465,13 +690,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -481,6 +729,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -494,21 +766,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       children > 0 &&
-      (adults === '0' || adults === '') &&
-      (babies === '0' || babies === '') &&
-      (seniors === '0' || seniors === '')
+      (adults === undefined || adults === '') &&
+      (babies === undefined || babies === '') &&
+      (seniors === undefined || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -516,14 +788,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -538,13 +810,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -554,6 +849,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -567,21 +886,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       children > 0 &&
-      (adults === '0' || adults === '') &&
-      (babies === '0' || babies === '') &&
+      (adults === undefined || adults === '') &&
+      (babies === undefined || babies === '') &&
       seniors > 0
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -589,7 +908,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -597,14 +916,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: name,
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -615,17 +934,40 @@ export default async function handler(req, res, ) {
             dropdown: {
               options: [
                 {
-                  label: arrival,
-                  value: arrival,
+                  label: 'Wednesday, Oct. 16, 2024',
+                  value: '101624',
                 },
                 {
-                  label: arrival,
-                  value: arrival,
+                  label: 'Thursday, Oct. 17, 2024',
+                  value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -636,25 +978,49 @@ export default async function handler(req, res, ) {
             dropdown: {
               options: [
                 {
-                  label: 'Juneteenth',
-                  value: 101924,
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
                 },
                 {
-                  label: 'Sukkot',
-                  value: 102424,
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
+                {
+                  label: 'Thursday, Oct. 24, 2024',
+                  value: '102424',
+                },
+                {
+                  label: 'Friday, Oct. 25, 2024',
+                  value: '102524',
                 },
               ],
             },
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       children > 0 &&
-      (adults === '0' || adults === '') &&
+      (adults === undefined || adults === '') &&
       babies > 0 &&
       seniors > 0
     ) {
@@ -662,7 +1028,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -670,7 +1036,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -678,7 +1044,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -686,14 +1052,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -708,13 +1074,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -724,6 +1113,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -737,21 +1150,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       children > 0 &&
-      (adults === '0' || adults === '') &&
+      (adults === undefined || adults === '') &&
       babies > 0 &&
-      (seniors === '0' || seniors === '')
+      (seniors === undefined || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRIAv06vvlhwKYtkoEKK7Cw', //Children
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -760,7 +1173,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -768,14 +1181,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -790,13 +1203,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -806,6 +1242,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -819,21 +1279,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       babies > 0 &&
-      (children === '0' || children === '') &&
-      (seniors === '0' || seniors === '') &&
-      (adults === '0' || adults === '')
+      (children === undefined || children === '') &&
+      (seniors === undefined || seniors === '') &&
+      (adults === undefined || adults === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -841,14 +1301,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -863,13 +1323,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -879,6 +1362,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -892,21 +1399,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       babies > 0 &&
-      (children === '0' || children === '') &&
-      (seniors === '0' || seniors === '') &&
+      (children === undefined || children === '') &&
+      (seniors === undefined || seniors === '') &&
       adults > 0
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -914,7 +1421,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -922,14 +1429,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -944,13 +1451,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -960,6 +1490,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -973,13 +1527,13 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       babies > 0 &&
-      (children === '0' || children === '') &&
+      (children === undefined || children === '') &&
       seniors > 0 &&
       adults > 0
     ) {
@@ -987,7 +1541,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -995,7 +1549,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1003,7 +1557,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1011,14 +1565,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -1033,13 +1587,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -1049,6 +1626,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -1062,13 +1663,13 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       babies > 0 &&
-      (children === '0' || children === '') &&
+      (children === undefined || children === '') &&
       seniors > 0 &&
       adults > 0
     ) {
@@ -1076,7 +1677,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -1084,7 +1685,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1092,7 +1693,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1100,14 +1701,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -1122,13 +1723,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -1138,6 +1762,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -1151,21 +1799,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       seniors > 0 &&
-      (children === '0' || children === '') &&
-      (adults === '0' || adults === '') &&
-      (babies === '0' || babies === '')
+      (children === undefined || children === '') &&
+      (adults === undefined || adults === '') &&
+      (babies === undefined || babies === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1173,14 +1821,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -1195,13 +1843,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -1211,6 +1882,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -1224,21 +1919,21 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       seniors > 0 &&
-      (children === '0' || children === '') &&
-      (adults === '0' || adults === '') &&
+      (children === undefined || children === '') &&
+      (adults === undefined || adults === '') &&
       babies > 0
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1246,7 +1941,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1254,14 +1949,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -1276,13 +1971,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -1292,6 +2010,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -1305,13 +2047,13 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
     } else if (
       seniors > 0 &&
-      (children === '0' || children === '') &&
+      (children === undefined || children === '') &&
       adults > 0 &&
       babies > 0
     ) {
@@ -1319,7 +2061,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRatJ06vvlhwKYtUTxDWx4q', //Seniors
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1327,7 +2069,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRb1Q06vvlhwKYtR8UnC1hp', //Babies
+            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1335,7 +2077,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PRHJq06vvlhwKYtFawLn4zz', //Adults
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -1343,14 +2085,14 @@ export default async function handler(req, res, ) {
           },
         ],
         custom_fields: [
-          {
-            key: 'name',
-            label: {
-              type: 'custom',
-              custom: 'Full Name',
-            },
-            type: 'text',
-          },
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
           {
             key: 'arrival',
             label: {
@@ -1365,13 +2107,36 @@ export default async function handler(req, res, ) {
                   value: '101624',
                 },
                 {
-                  label: 'Wednesday, Oct. 17, 2024',
+                  label: 'Thursday, Oct. 17, 2024',
                   value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
                 },
               ],
             },
           },
-
           {
             key: 'departure',
             label: {
@@ -1381,6 +2146,30 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -1394,11 +2183,46 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
+        success_url: 'https://www.goshengroup.net/en/gatherings',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    }     
+    }  else if ( adults > 0 && children > 0 && seniors > 0 && babies === undefined){
+      temp = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            quantity: adults,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            quantity: seniors,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            quantity: children,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+        ],
+        mode: 'payment',
+        success_url: 'https://www.goshengroup.net/en/gatherings',
+        // success_url: `${req.headers.origin}/?success=true`,
+        cancel_url: `${req.headers.origin}/?canceled=true`,
+        automatic_tax: { enabled: false },
+      });
+    }
+    
       const session = temp
        
       console.log(session)

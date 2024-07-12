@@ -8,6 +8,7 @@ import 'tailwindcss/tailwind.css';
 
 
 
+
 // if(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY === undefined) {
 //   throw new Error("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined");
 // }
@@ -16,7 +17,10 @@ import 'tailwindcss/tailwind.css';
 
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
+  {
+    apiVersion: '2023-08-16',
+  }
 );
 
 interface Registration {
@@ -127,13 +131,12 @@ const Registration = ({ data }: Registration) => {
 
       <form
         method='POST'
-        
         // action='/pages/api/checkout_sessions'
         // action='../../api/checkout_sessions'
         action='/api/checkout_sessions'
         className='flex flex-col px-10 lg:border-white lg:border-t-4 pt-8 gap-y-4 text-2xl [&_input]:w-[calc(100%-1px)] xl:[&_input]:w-[calc(100%-23px)] [&_input]:py-2 [&_input]:pl-4 md:[&_input]:p-4 [&_input]:rounded-md xl:[&_input]:rounded-none xl:[&_input]:rounded-r-md  [&_label]:flex xl:[&_label]:justify-end md:[&_label]:w-3/4 [&_label]:items-center [&_label]:text-white [&_i]:ml-4 [&_i]:rounded-l-md [&_i]:p-2 [&_i]:bg-violet-600 lg:w-2/3 xl:w-4/5 [&_select]:rounded-md xl:[&_select]:rounded-none xl:[&_select]:rounded-r-md'
       >
-        <div className='grid xl:flex xl:flex-end '>
+        {/* <div className='grid xl:flex xl:flex-end '>
           <label className='text-2x text-white'>Full Name: </label>
 
           <i
@@ -143,18 +146,17 @@ const Registration = ({ data }: Registration) => {
           <input
             aria-label='label for name input'
             type='text'
-            placeholder="NAME"
-            // placeholder={data.name}
+            placeholder='Name'
             name='name'
             id='name'
             value={name}
             onChange={(e) => setName(e.target.value)}
             onBlur={(e) => validate(e.target as HTMLInputElement)}
           />
-        </div>
+        </div> */}
 
         <div id='name-error' className='text-yellow-200 text-lg hidden '></div>
-        <div className='grid xl:flex'>
+        {/* <div className='grid xl:flex'>
           <label className='flex '>Email:</label>
           <i
             className='bx bxs-envelope lg:text-5xl'
@@ -163,7 +165,7 @@ const Registration = ({ data }: Registration) => {
           <input
             aria-label='label for email input'
             type='email'
-            placeholder="Email"
+            placeholder='Email'
             name='email'
             id='email'
             value={email}
@@ -172,7 +174,7 @@ const Registration = ({ data }: Registration) => {
             required
           />
         </div>
-        <div id='email-error' className='text-yellow-200 text-lg hidden'></div>
+        <div id='email-error' className='text-yellow-200 text-lg hidden'></div> */}
         <div className='grid xl:flex '>
           <label htmlFor='select'>Number of Adults: </label>
 
@@ -186,12 +188,12 @@ const Registration = ({ data }: Registration) => {
             name='adults'
             id='adults'
             className='w-full'
-            value={adults || ''}
+            value={adults || '' || 0}
             onChange={(e) => setAdults(parseInt(e.target.value, 10))}
           >
-            {/* <option value='' hidden disabled>
-              &nbsp;&nbsp;{data.adults}
-            </option> */}
+            <option value='0' hidden disabled>
+              &nbsp;&nbsp;0
+            </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
@@ -215,9 +217,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex  lg:text-2xl'>
-          <label htmlFor='select' >
-            Number of Children over 12:{' '}
-          </label>
+          <label htmlFor='select'>Number of Children over 12: </label>
           <i
             className='bx bx-child  lg:text-5xl '
             style={{ color: '#ffffff' }}
@@ -227,13 +227,12 @@ const Registration = ({ data }: Registration) => {
             name='children'
             id='children'
             className='w-full'
-            value={children || ''}
+            value={children || '' || 0}
             onChange={(e) => setChildren(parseInt(e.target.value, 10))}
           >
-            {/* <option value='' hidden disabled>
-              &nbsp;&nbsp;{data.children}
-            </option> */}
-            {/* <option value=''>{data.children}</option> */}
+            <option value='0' hidden disabled>
+              &nbsp;&nbsp;0
+            </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
@@ -257,9 +256,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex   lg:text-2xl'>
-          <label htmlFor='select' >
-            Number of Children under 12:{' '}
-          </label>
+          <label htmlFor='select'>Number of Children under 12: </label>
 
           <i
             className='bx bx-child  lg:text-5xl'
@@ -270,12 +267,12 @@ const Registration = ({ data }: Registration) => {
             name='babies'
             id='babies'
             className='w-full'
-            value={babies || ''}
+            value={babies || '' || 0}
             onChange={(e) => setBabies(parseInt(e.target.value, 10))}
           >
-            {/* <option value='' selected hidden disabled>
-              &nbsp;&nbsp;{data.babies}
-            </option> */}
+            <option value='0' selected hidden disabled>
+              &nbsp;&nbsp;0
+            </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
@@ -299,9 +296,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex  lg:text-2xl'>
-          <label htmlFor='select'>
-            Number of Seniors:{' '}
-          </label>
+          <label htmlFor='select'>Number of Seniors: </label>
           <i
             className='bx bx-male-female lg:text-5xl'
             style={{ color: '#ffffff' }}
@@ -311,12 +306,12 @@ const Registration = ({ data }: Registration) => {
             name='seniors'
             id='seniors'
             className='w-full'
-            value={seniors || ''}
+            value={seniors || '' || 0}
             onChange={(e) => setSeniors(parseInt(e.target.value, 10))}
           >
-            {/* <option value='' hidden disabled>
-              &nbsp;&nbsp;{data.seniors}
-            </option> */}
+            <option value='0' hidden disabled>
+              &nbsp;&nbsp;0
+            </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
@@ -339,7 +334,7 @@ const Registration = ({ data }: Registration) => {
             <option value='20'>20</option>
           </select>
         </div>
-        <div className='grid xl:flex '>
+        {/* <div className='grid xl:flex '>
           <label htmlFor='select'>Estimated Arrival Date: </label>
           <i
             className='bx bx-calendar lg:text-5xl'
@@ -351,14 +346,36 @@ const Registration = ({ data }: Registration) => {
               type={arrival_field}
               name='arrival_date'
               id='arrival_date'
+              min='2024-10-16'
               value={arrival_date}
               onChange={(e) => setArrival_date(e.target.value)}
               onFocus={() => setArrival_field('date')}
               onBlur={() => setArrival_field('text')}
+              required   
             />
+            <select
+              aria-label='arrival_date'
+              name='arrival_date'
+              id='arrival_date'
+              value={arrival_date}
+              onChange={(e) => setArrival_date(e.target.value)}
+            >
+              <option value='' hidden disabled>
+                &nbsp;&nbsp;Please Select
+              </option>
+              <option value='10-16-2024'>10-16-2024</option>
+              <option value='10-17-2024'>10-17-2024</option>
+              <option value='10-18-2024'>10-18-2024</option>
+              <option value='10-19-2024'>10-19-2024</option>
+              <option value='10-20-2024'>10-20-2024</option>
+              <option value='10-21-2024'>10-21-2024</option>
+              <option value='10-22-2024'>10-22-2024</option>
+              <option value='10-23-2024'>10-23-2024</option>
+              <option value='10-24-2024'>10-24-2024</option>
+            </select>
           </div>
-        </div>
-        <div className='grid xl:flex'>
+        </div> */}
+        {/* <div className='grid xl:flex'>
           <label htmlFor='select'>Estimated Departure Date: </label>
 
           <i
@@ -366,7 +383,6 @@ const Registration = ({ data }: Registration) => {
             style={{ color: '#ffffff' }}
           ></i>
           <div className='bg-white items-center w-full rounded-md lg:rounded-r-md lg:flex lg:justify-between'>
-            {/* <span>{data.departure_date}</span> */}
             <input
               aria-label='label for departure date input'
               type={departure_field}
@@ -374,21 +390,40 @@ const Registration = ({ data }: Registration) => {
               id='departure_date'
               max='2024-10-25'
               value={departure_date}
-              // placeholder={data.departure_date}
               onChange={(e) => setDeparture_date(e.target.value)}
               onFocus={() => setDeparture_field('date')}
               onBlur={() => setDeparture_field('text')}
+              required
             />
+            <select
+              aria-label='departure_date'
+              name='departure_date'
+              id='departure_date'
+              value={departure_date}
+              onChange={(e) => setDeparture_date(e.target.value)}
+            >
+              <option value='' hidden disabled>
+                &nbsp;&nbsp;Please Select
+              </option>
+              <option value='10-18-2024'>10-18-2024</option>
+              <option value='10-19-2024'>10-19-2024</option>
+              <option value='10-20-2024'>10-20-2024</option>
+              <option value='10-21-2024'>10-21-2024</option>
+              <option value='10-22-2024'>10-22-2024</option>
+              <option value='10-23-2024'>10-23-2024</option>
+              <option value='10-24-2024'>10-24-2024</option>
+              <option value='10-25-2024'>10-25-2024</option>
+            </select>
           </div>
-        </div>
+        </div> */}
         <button
           role='link'
           className='bg-white text-black rounded-md w-3/4 mx-auto py-4 lg:w-full  md:px-2 font-bold mt-6'
           type='submit'
-        >CHECKOUT
+        >
+          CHECKOUT
         </button>
       </form>
-      
     </section>
   );
 };
