@@ -42,10 +42,10 @@ interface Registration {
 const Registration = ({ data }: Registration) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [adults, setAdults] = useState<number>(0);
-  const [children, setChildren] = useState<number>(0);
-  const [babies, setBabies] = useState<number>(0);
-  const [seniors, setSeniors] = useState<number>(0);
+  const [adults, setAdults] = useState<number>();
+  const [children, setChildren] = useState<number>();
+  const [babies, setBabies] = useState<number>();
+  const [seniors, setSeniors] = useState<number>();
   const [arrival_date, setArrival_date] = useState('');
   const [departure_date, setDeparture_date] = useState('');
   const [arrival_field, setArrival_field] = useState('');
@@ -188,11 +188,11 @@ const Registration = ({ data }: Registration) => {
             name='adults'
             id='adults'
             className='w-full'
-            value={adults || '' || 0}
+            value={adults }
             onChange={(e) => setAdults(parseInt(e.target.value, 10))}
           >
-            <option value='0' hidden disabled>
-              &nbsp;&nbsp;0
+            <option  selected disabled>
+              &nbsp;&nbsp;Please Select
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -227,11 +227,11 @@ const Registration = ({ data }: Registration) => {
             name='children'
             id='children'
             className='w-full'
-            value={children || '' || 0}
+            value={children}
             onChange={(e) => setChildren(parseInt(e.target.value, 10))}
           >
-            <option value='0' hidden disabled>
-              &nbsp;&nbsp;0
+            <option  selected disabled>
+              &nbsp;&nbsp;Please Select
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -267,11 +267,11 @@ const Registration = ({ data }: Registration) => {
             name='babies'
             id='babies'
             className='w-full'
-            value={babies || '' || 0}
+            value={babies}
             onChange={(e) => setBabies(parseInt(e.target.value, 10))}
           >
-            <option value='0' selected hidden disabled>
-              &nbsp;&nbsp;0
+            <option  selected  disabled>
+              &nbsp;&nbsp;Please Select
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -306,11 +306,11 @@ const Registration = ({ data }: Registration) => {
             name='seniors'
             id='seniors'
             className='w-full'
-            value={seniors || '' || 0}
+            value={seniors}
             onChange={(e) => setSeniors(parseInt(e.target.value, 10))}
           >
-            <option value='0' hidden disabled>
-              &nbsp;&nbsp;0
+            <option  selected disabled>
+              &nbsp;&nbsp;Please Select
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>

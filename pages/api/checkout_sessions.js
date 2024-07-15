@@ -133,8 +133,8 @@ export default async function handler(req, res, ) {
              },
            ],
            mode: 'payment',
-          //  success_url: 'https://www.goshengroup.net/en/gatherings',
-           success_url: `${req.headers.origin}/?success=true`,
+           success_url: 'https://www.goshengroup.net/en/gatherings',
+          //  success_url: `${req.headers.origin}/?success=true`,
 
            cancel_url: `${req.headers.origin}/?canceled=true`,
            automatic_tax: { enabled: false },
@@ -498,6 +498,31 @@ export default async function handler(req, res, ) {
             type: 'dropdown',
             dropdown: {
               options: [
+                
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
                 {
                   label: 'Thursday, Oct. 24, 2024',
                   value: '102424',
@@ -2208,10 +2233,108 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
+            },
+          },
+        ],
+        custom_fields: [
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
+          {
+            key: 'arrival',
+            label: {
+              type: 'custom',
+              custom: 'Estimated Arrival Date',
+            },
+            type: 'dropdown',
+            dropdown: {
+              options: [
+                {
+                  label: 'Wednesday, Oct. 16, 2024',
+                  value: '101624',
+                },
+                {
+                  label: 'Thursday, Oct. 17, 2024',
+                  value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
+              ],
+            },
+          },
+          {
+            key: 'departure',
+            label: {
+              type: 'custom',
+              custom: 'Estimated Departure Date',
+            },
+            type: 'dropdown',
+            dropdown: {
+              options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
+                {
+                  label: 'Thursday, Oct. 24, 2024',
+                  value: '102424',
+                },
+                {
+                  label: 'Friday, Oct. 25, 2024',
+                  value: '102524',
+                },
+              ],
             },
           },
         ],
