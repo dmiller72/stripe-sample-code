@@ -27,7 +27,7 @@ export default async function handler(req, res, ) {
            line_items: [
              {
                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-               price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+               price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
                quantity: adults,
                adjustable_quantity: {
                  enabled: true,
@@ -145,7 +145,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -153,7 +153,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -269,7 +269,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -277,7 +277,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -285,7 +285,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -401,7 +401,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -409,7 +409,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children           
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children           
              quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -417,7 +417,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -425,7 +425,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -546,7 +546,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -555,7 +555,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -676,7 +676,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -685,7 +685,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -805,7 +805,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -925,7 +925,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -933,7 +933,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1053,7 +1053,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -1061,7 +1061,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1069,7 +1069,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1189,7 +1189,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children            
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children            
             quantity: children,
             adjustable_quantity: {
               enabled: true,
@@ -1198,7 +1198,7 @@ export default async function handler(req, res, ) {
 
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1318,7 +1318,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1438,7 +1438,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -1446,7 +1446,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1566,7 +1566,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -1574,7 +1574,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1582,7 +1582,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1702,7 +1702,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -1710,7 +1710,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -1718,7 +1718,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1838,7 +1838,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1958,7 +1958,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -1966,7 +1966,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -2086,7 +2086,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -2094,7 +2094,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqHb2LiTnoM0Yg8Y5U9NOm', //Babies
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
             quantity: babies,
             adjustable_quantity: {
               enabled: true,
@@ -2102,7 +2102,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -2217,7 +2217,7 @@ export default async function handler(req, res, ) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqCx2LiTnoM0YgRwl63Pbs', //Adults
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
             quantity: adults,
             adjustable_quantity: {
               enabled: true,
@@ -2225,7 +2225,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqI82LiTnoM0YgGkV6JRSG', //Seniors
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
               enabled: true,
@@ -2233,7 +2233,7 @@ export default async function handler(req, res, ) {
           },
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqEv2LiTnoM0Ygmxh0LDH4', //Children
+            price: 'price_1PbqnB2LiTnoM0YgVG1rkJmJ', //Children
             quantity: children,
             adjustable_quantity: {
               enabled: true,
