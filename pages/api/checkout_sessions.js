@@ -428,8 +428,10 @@ export default async function handler(req, res, ) {
             price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
             quantity: seniors,
             adjustable_quantity: {
-              enabled: true,
+              enabled: true,  
             },
+
+            
           },
         ],
         custom_fields: [
