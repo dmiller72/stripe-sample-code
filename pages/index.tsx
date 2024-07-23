@@ -136,7 +136,7 @@ const Registration = ({ data }: Registration) => {
         <div id='name-error' className='text-yellow-200 text-lg hidden '></div>
        
         <div className='grid xl:flex '>
-          <label htmlFor='select'>Number of Adults: </label>
+          <label htmlFor='select'>Number of Adults/Teenagers (13 - 69): </label>
 
           <i
             className='bx bx-male-female lg:text-5xl'
@@ -148,10 +148,10 @@ const Registration = ({ data }: Registration) => {
             name='adults'
             id='adults'
             className='w-full'
-            value={Number(adults) ?? ''}
+            value={Number(adults) ?? ""}
             onChange={(e) =>
-              setAdults(Number(e.target.value))
-            //  setChildren(e.target.value === "" ? null : Number(e.target.value))
+              // setAdults(Number(e.target.value))
+             setAdults(e.target.value === "" ? null : Number(e.target.value))
 
             }
             // onChange={(e) => setAdults(parseInt(e.target.value, 10))}
@@ -180,7 +180,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex  lg:text-2xl'>
-          <label htmlFor='select'>Number of Children over 12: </label>
+          <label htmlFor='select'>Number of Children (6 - 12): </label>
           <i
             className='bx bx-child  lg:text-5xl '
             style={{ color: '#ffffff' }}
@@ -190,7 +190,7 @@ const Registration = ({ data }: Registration) => {
             name='children'
             id='children'
             className='w-full'
-            value={children ?? ''}
+            value={children ?? ""}
             onChange={(e) =>
               setChildren(e.target.value === "" ? null : Number(e.target.value))
             }
@@ -222,7 +222,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex   lg:text-2xl'>
-          <label htmlFor='select'>Number of Children under 12: </label>
+          <label htmlFor='select'>Number of Children (0 - 6): </label>
 
           <i
             className='bx bx-child  lg:text-5xl'
@@ -233,7 +233,7 @@ const Registration = ({ data }: Registration) => {
             name='babies'
             id='babies'
             className='w-full'
-            value={babies ?? ''}
+            value={babies ?? ""}
             onChange={(e) =>
               setBabies(e.target.value === "" ? null : Number(e.target.value))
             }
@@ -265,7 +265,7 @@ const Registration = ({ data }: Registration) => {
           </select>
         </div>
         <div className='grid xl:flex  lg:text-2xl'>
-          <label htmlFor='select'>Number of Seniors: </label>
+          <label htmlFor='select'>Number of Seniors (70+): </label>
           <i
             className='bx bx-male-female lg:text-5xl'
             style={{ color: '#ffffff' }}
