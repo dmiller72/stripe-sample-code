@@ -1,29 +1,38 @@
 // const stripe = require('stripe')(JSON.stringify((process.env.STRIPE_SECRET_KEY)));
+'useclient'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 
 export default async function handler(req, res, ) {
   if (req.method === 'POST') {
-      // const name = req.body.name;
-      // const email = req.body.email;
-      // const adults = 1;
-      // const children = 0;
-      // const babies = 0;
-      // const seniors = 1;
+
+      // const disabledCheckout = req.body.disabledCheckout
       const adults = req.body.adults;
       const children = req.body.children;
       const babies = req.body.babies
       const seniors = req.body.seniors
-      // const arrival = req.body.arrival_date
-      // const departure = req.body.departure_date
+     
       
  
     try {
       // Create Checkout Sessions from body params.
       let temp;
-       if (adults > 0 && children === undefined && babies === undefined && seniors === undefined  ) {
-      //  if (adults > 0 &&(children === '0' || children === '' || children === null) && (seniors === '0' || seniors === '' || seniors === 0) && (babies === undefined || babies === '' || babies === 0)) {
-         temp = await stripe.checkout.sessions.create({
+      // if( adults === 0 && babies === 0 && children === 0 && seniors === 0){
+      //   disabledCheckout =  true;
+      // } else if 
+      // ( adults === "" && babies === "" && children === "" && seniors === ""){
+      //   disabledCheckout =  true;
+      // } else if
+      console.log(`Before the if ${adults}`);
+      console.log(`Before the if ${children}`);
+      console.log(`Before the if ${babies}`);
+      console.log(`Before the if ${seniors}`);
+      
+       if(adults > 0 && children === "" && babies === "" && seniors === ""  ) {
+        console.log(`After the if ${adults}`);
+        console.log(`After the if ${children}`);
+        temp = await stripe.checkout.sessions.create({
            line_items: [
              {
                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
@@ -139,8 +148,8 @@ export default async function handler(req, res, ) {
            cancel_url: `${req.headers.origin}/?canceled=true`,
            automatic_tax: { enabled: false },
          });
-       }  else
-    if (adults > 0 && children > 0 &&(seniors === undefined || seniors === '') && (babies === undefined || babies === '')) {
+       }  else if
+    (adults > 0 && children > 0 &&(seniors === "" || seniors === '') && (babies === "" || babies === '')) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -263,8 +272,8 @@ export default async function handler(req, res, ) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    } else
-    if (adults > 0 && children > 0 && babies > 0 &&(seniors === undefined || seniors === '')) {
+    } else if
+     (adults > 0 && children > 0 && babies > 0 &&(seniors === "" || seniors === '')) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -395,8 +404,8 @@ export default async function handler(req, res, ) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    } else
-    if (adults > 0 && children > 0 && babies > 0 && seniors > 0) {
+    } else if
+     (adults > 0 && children > 0 && babies > 0 && seniors > 0) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -542,8 +551,8 @@ export default async function handler(req, res, ) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    } else
-    if (adults > 0 &&(children === undefined || children === '') && (babies === undefined || babies === '')  && seniors > 0 ) {
+    } else if
+     (adults > 0 &&(children === "" || children === '') && (babies === "" || babies === '')  && seniors > 0 ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -667,12 +676,12 @@ export default async function handler(req, res, ) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    } else 
-    if (
+    } else if
+     (
       adults > 0 &&
-      (children === undefined || children === '') &&
-      (babies === undefined || babies === '') &&
-      (seniors === undefined || seniors === '')
+      (children === "" || children === '') &&
+      (babies === "" || babies === '') &&
+      (seniors === "" || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
@@ -799,9 +808,9 @@ export default async function handler(req, res, ) {
       });
     } else if (
       children > 0 &&
-      (adults === undefined || adults === '') &&
-      (babies === undefined || babies === '') &&
-      (seniors === undefined || seniors === '')
+      (adults === "" || adults === '') &&
+      (babies === "" || babies === '') &&
+      (seniors === "" || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
@@ -919,8 +928,8 @@ export default async function handler(req, res, ) {
       });
     } else if (
       children > 0 &&
-      (adults === undefined || adults === '') &&
-      (babies === undefined || babies === '') &&
+      (adults === "" || adults === '') &&
+      (babies === "" || babies === '') &&
       seniors > 0
     ) {
       temp = await stripe.checkout.sessions.create({
@@ -1047,7 +1056,7 @@ export default async function handler(req, res, ) {
       });
     } else if (
       children > 0 &&
-      (adults === undefined || adults === '') &&
+      (adults === "" || adults === '') &&
       babies > 0 &&
       seniors > 0
     ) {
@@ -1183,9 +1192,9 @@ export default async function handler(req, res, ) {
       });
     } else if (
       children > 0 &&
-      (adults === undefined || adults === '') &&
+      (adults === "" || adults === '') &&
       babies > 0 &&
-      (seniors === undefined || seniors === '')
+      (seniors === "" || seniors === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
@@ -1312,9 +1321,9 @@ export default async function handler(req, res, ) {
       });
     } else if (
       babies > 0 &&
-      (children === undefined || children === '') &&
-      (seniors === undefined || seniors === '') &&
-      (adults === undefined || adults === '')
+      (children === "" || children === '') &&
+      (seniors === "" || seniors === '') &&
+      (adults === "" || adults === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
@@ -1432,8 +1441,8 @@ export default async function handler(req, res, ) {
       });
     } else if (
       babies > 0 &&
-      (children === undefined || children === '') &&
-      (seniors === undefined || seniors === '') &&
+      (children === "" || children === '') &&
+      (seniors === "" || seniors === '') &&
       adults > 0
     ) {
       temp = await stripe.checkout.sessions.create({
@@ -1560,143 +1569,7 @@ export default async function handler(req, res, ) {
       });
     } else if (
       babies > 0 &&
-      (children === undefined || children === '') &&
-      seniors > 0 &&
-      adults > 0
-    ) {
-      temp = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
-            quantity: adults,
-            adjustable_quantity: {
-              enabled: true,
-            },
-          },
-          {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
-            quantity: babies,
-            adjustable_quantity: {
-              enabled: true,
-            },
-          },
-          {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
-            quantity: seniors,
-            adjustable_quantity: {
-              enabled: true,
-            },
-          },
-        ],
-        custom_fields: [
-          // {
-          //   key: 'name',
-          //   label: {
-          //     type: 'custom',
-          //     custom: 'Full Name',
-          //   },
-          //   type: 'text',
-          // },
-          {
-            key: 'arrival',
-            label: {
-              type: 'custom',
-              custom: 'Estimated Arrival Date',
-            },
-            type: 'dropdown',
-            dropdown: {
-              options: [
-                {
-                  label: 'Wednesday, Oct. 16, 2024',
-                  value: '101624',
-                },
-                {
-                  label: 'Thursday, Oct. 17, 2024',
-                  value: '101724',
-                },
-                {
-                  label: 'Friday, Oct. 18, 2024',
-                  value: '101824',
-                },
-                {
-                  label: 'Saturday, Oct. 19, 2024',
-                  value: '101924',
-                },
-                {
-                  label: 'Sunday, Oct. 20, 2024',
-                  value: '102024',
-                },
-                {
-                  label: 'Monday, Oct. 21, 2024',
-                  value: '102124',
-                },
-                {
-                  label: 'Tuesday, Oct. 22, 2024',
-                  value: '102224',
-                },
-                {
-                  label: 'Wednesday, Oct. 23, 2024',
-                  value: '102324',
-                },
-              ],
-            },
-          },
-          {
-            key: 'departure',
-            label: {
-              type: 'custom',
-              custom: 'Estimated Departure Date',
-            },
-            type: 'dropdown',
-            dropdown: {
-              options: [
-                {
-                  label: 'Friday, Oct. 18, 2024',
-                  value: '101824',
-                },
-                {
-                  label: 'Saturday, Oct. 19, 2024',
-                  value: '101924',
-                },
-                {
-                  label: 'Sunday, Oct. 20, 2024',
-                  value: '102024',
-                },
-                {
-                  label: 'Monday, Oct. 21, 2024',
-                  value: '102124',
-                },
-                {
-                  label: 'Tuesday, Oct. 22, 2024',
-                  value: '102224',
-                },
-                {
-                  label: 'Wednesday, Oct. 23, 2024',
-                  value: '102324',
-                },
-                {
-                  label: 'Thursday, Oct. 24, 2024',
-                  value: '102424',
-                },
-                {
-                  label: 'Friday, Oct. 25, 2024',
-                  value: '102524',
-                },
-              ],
-            },
-          },
-        ],
-        mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
-        cancel_url: `${req.headers.origin}/?canceled=true`,
-        automatic_tax: { enabled: false },
-      });
-    } else if (
-      babies > 0 &&
-      (children === undefined || children === '') &&
+      (children === "" || children === '') &&
       seniors > 0 &&
       adults > 0
     ) {
@@ -1831,10 +1704,146 @@ export default async function handler(req, res, ) {
         automatic_tax: { enabled: false },
       });
     } else if (
+      babies > 0 &&
+      (children === "" || children === '') &&
       seniors > 0 &&
-      (children === undefined || children === '') &&
-      (adults === undefined || adults === '') &&
-      (babies === undefined || babies === '')
+      adults > 0
+    ) {
+      temp = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1PbqnG2LiTnoM0YgvMgvsGl4', //Adults
+            quantity: adults,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1Pbqn52LiTnoM0YggJJ8KbSJ', //Babies
+            quantity: babies,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+          {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1Pbqmy2LiTnoM0Yg1t75mwO9', //Seniors
+            quantity: seniors,
+            adjustable_quantity: {
+              enabled: true,
+            },
+          },
+        ],
+        custom_fields: [
+          // {
+          //   key: 'name',
+          //   label: {
+          //     type: 'custom',
+          //     custom: 'Full Name',
+          //   },
+          //   type: 'text',
+          // },
+          {
+            key: 'arrival',
+            label: {
+              type: 'custom',
+              custom: 'Estimated Arrival Date',
+            },
+            type: 'dropdown',
+            dropdown: {
+              options: [
+                {
+                  label: 'Wednesday, Oct. 16, 2024',
+                  value: '101624',
+                },
+                {
+                  label: 'Thursday, Oct. 17, 2024',
+                  value: '101724',
+                },
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
+              ],
+            },
+          },
+          {
+            key: 'departure',
+            label: {
+              type: 'custom',
+              custom: 'Estimated Departure Date',
+            },
+            type: 'dropdown',
+            dropdown: {
+              options: [
+                {
+                  label: 'Friday, Oct. 18, 2024',
+                  value: '101824',
+                },
+                {
+                  label: 'Saturday, Oct. 19, 2024',
+                  value: '101924',
+                },
+                {
+                  label: 'Sunday, Oct. 20, 2024',
+                  value: '102024',
+                },
+                {
+                  label: 'Monday, Oct. 21, 2024',
+                  value: '102124',
+                },
+                {
+                  label: 'Tuesday, Oct. 22, 2024',
+                  value: '102224',
+                },
+                {
+                  label: 'Wednesday, Oct. 23, 2024',
+                  value: '102324',
+                },
+                {
+                  label: 'Thursday, Oct. 24, 2024',
+                  value: '102424',
+                },
+                {
+                  label: 'Friday, Oct. 25, 2024',
+                  value: '102524',
+                },
+              ],
+            },
+          },
+        ],
+        mode: 'payment',
+        success_url: 'https://www.goshengroup.net/en/gatherings',
+        cancel_url: `${req.headers.origin}/?canceled=true`,
+        automatic_tax: { enabled: false },
+      });
+    } else if (
+      seniors > 0 &&
+      (children === "" || children === '') &&
+      (adults === "" || adults === '') &&
+      (babies === "" || babies === '')
     ) {
       temp = await stripe.checkout.sessions.create({
         line_items: [
@@ -1952,8 +1961,8 @@ export default async function handler(req, res, ) {
       });
     } else if (
       seniors > 0 &&
-      (children === undefined || children === '') &&
-      (adults === undefined || adults === '') &&
+      (children === "" || children === '') &&
+      (adults === "" || adults === '') &&
       babies > 0
     ) {
       temp = await stripe.checkout.sessions.create({
@@ -2080,7 +2089,7 @@ export default async function handler(req, res, ) {
       });
     } else if (
       seniors > 0 &&
-      (children === undefined || children === '') &&
+      (children === "" || children === '') &&
       adults > 0 &&
       babies > 0
     ) {
@@ -2214,7 +2223,7 @@ export default async function handler(req, res, ) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
-    }  else if ( adults > 0 && children > 0 && seniors > 0 && babies === undefined){
+    }  else if ( adults > 0 && children > 0 && seniors > 0 && babies === ""){
       temp = await stripe.checkout.sessions.create({
         line_items: [
           {

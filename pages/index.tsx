@@ -40,22 +40,19 @@ interface Registration {
 
 
 const Registration = ({ data }: Registration) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [adults, setAdults] = useState<number>();
-  const [children, setChildren] = useState<number>();
-  const [babies, setBabies] = useState<number>();
-  const [seniors, setSeniors] = useState<number>();
-  const [arrival_date, setArrival_date] = useState('');
-  const [departure_date, setDeparture_date] = useState('');
-  const [arrival_field, setArrival_field] = useState('');
-  ('text');
-  const [departure_field, setDeparture_field] = useState('text');
+  const [adults, setAdults] = useState<number | null>(null);
+  const [children, setChildren] = useState<number | null>(null);
+  const [babies, setBabies] = useState<number | null>(null);
+  const [seniors, setSeniors] = useState<number | null>(null);
+  const [disabledCheckout, setDisabledCheckout] = useState(false);
+
+  // const allFieldsUndefined = adults === undefined && seniors === undefined && children === undefined && babies === undefined;
+  // const allFieldsZero = adults === 0 && seniors === 0 && children === 0 && babies === 0;
+  const allFieldsUnselected = adults === null && seniors === null && children === null && babies === null;
 
   React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
-    console.log(query);
     if (query.get('success')) {
       console.log('Order placed! You will receive an email confirmation.');
     }
@@ -127,54 +124,17 @@ const Registration = ({ data }: Registration) => {
 
   return (
     <section className='mx-auto bg-violet-900 px-2 md:w-3/4 md:rounded-xl flex-col lg:flex items-center py-8 lg:my-10 text-center [&_i]:hidden xl:[&_i]:block [&_select]:py-2 my-10 [&_label]:text-xl xl:[&_label]:text-2xl '>
-      <h1 className='text-white text-3xl lg:text-5xl lg:pb-5'>Registration</h1>
+      <h1 className='text-white text-3xl lg:text-5xl lg:pb-5'>Sukkot 2024 Registration</h1>
 
       <form
         method='POST'
-        // action='/pages/api/checkout_sessions'
-        // action='../../api/checkout_sessions'
         action='/api/checkout_sessions'
         className='flex flex-col px-10 lg:border-white lg:border-t-4 pt-8 gap-y-4 text-2xl [&_input]:w-[calc(100%-1px)] xl:[&_input]:w-[calc(100%-23px)] [&_input]:py-2 [&_input]:pl-4 md:[&_input]:p-4 [&_input]:rounded-md xl:[&_input]:rounded-none xl:[&_input]:rounded-r-md  [&_label]:flex xl:[&_label]:justify-end md:[&_label]:w-3/4 [&_label]:items-center [&_label]:text-white [&_i]:ml-4 [&_i]:rounded-l-md [&_i]:p-2 [&_i]:bg-violet-600 lg:w-2/3 xl:w-4/5 [&_select]:rounded-md xl:[&_select]:rounded-none xl:[&_select]:rounded-r-md'
       >
-        {/* <div className='grid xl:flex xl:flex-end '>
-          <label className='text-2x text-white'>Full Name: </label>
 
-          <i
-            className='bx bxs-user lg:text-5xl'
-            style={{ color: '#ffffff' }}
-          ></i>
-          <input
-            aria-label='label for name input'
-            type='text'
-            placeholder='Name'
-            name='name'
-            id='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onBlur={(e) => validate(e.target as HTMLInputElement)}
-          />
-        </div> */}
 
         <div id='name-error' className='text-yellow-200 text-lg hidden '></div>
-        {/* <div className='grid xl:flex'>
-          <label className='flex '>Email:</label>
-          <i
-            className='bx bxs-envelope lg:text-5xl'
-            style={{ color: '#ffffff' }}
-          ></i>
-          <input
-            aria-label='label for email input'
-            type='email'
-            placeholder='Email'
-            name='email'
-            id='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onBlur={(e) => validate(e.target as HTMLInputElement)}
-            required
-          />
-        </div>
-        <div id='email-error' className='text-yellow-200 text-lg hidden'></div> */}
+       
         <div className='grid xl:flex '>
           <label htmlFor='select'>Number of Adults: </label>
 
@@ -188,12 +148,15 @@ const Registration = ({ data }: Registration) => {
             name='adults'
             id='adults'
             className='w-full'
-            value={adults }
-            onChange={(e) => setAdults(parseInt(e.target.value, 10))}
+            value={Number(adults) ?? ''}
+            onChange={(e) =>
+              setAdults(Number(e.target.value))
+            //  setChildren(e.target.value === "" ? null : Number(e.target.value))
+
+            }
+            // onChange={(e) => setAdults(parseInt(e.target.value, 10))}
           >
-            <option  selected disabled>
-              &nbsp;&nbsp;Please Select
-            </option>
+            <option selected value="">&nbsp;&nbsp;Please Select (0)</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
             <option value='3'>3</option>
@@ -227,11 +190,14 @@ const Registration = ({ data }: Registration) => {
             name='children'
             id='children'
             className='w-full'
-            value={children}
-            onChange={(e) => setChildren(parseInt(e.target.value, 10))}
+            value={children ?? ''}
+            onChange={(e) =>
+              setChildren(e.target.value === "" ? null : Number(e.target.value))
+            }
+            // onChange={(e) => setChildren(parseInt(e.target.value, 10))}
           >
-            <option  selected disabled>
-              &nbsp;&nbsp;Please Select
+            <option selected value="" >
+              &nbsp;&nbsp;Please Select (0)
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -267,11 +233,14 @@ const Registration = ({ data }: Registration) => {
             name='babies'
             id='babies'
             className='w-full'
-            value={babies}
-            onChange={(e) => setBabies(parseInt(e.target.value, 10))}
+            value={babies ?? ''}
+            onChange={(e) =>
+              setBabies(e.target.value === "" ? null : Number(e.target.value))
+            }
+            // onChange={(e) => setBabies(parseInt(e.target.value, 10))}
           >
-            <option  selected  disabled>
-              &nbsp;&nbsp;Please Select
+            <option selected value=''>
+              &nbsp;&nbsp;Please Select (0)
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -306,11 +275,14 @@ const Registration = ({ data }: Registration) => {
             name='seniors'
             id='seniors'
             className='w-full'
-            value={seniors}
-            onChange={(e) => setSeniors(parseInt(e.target.value, 10))}
+            value={seniors ?? ""}
+            onChange={(e) =>
+              setSeniors(e.target.value === "" ? null : Number(e.target.value))
+            }
+            // onChange={(e) => setSeniors(parseInt(e.target.value, 10))}
           >
-            <option  selected disabled>
-              &nbsp;&nbsp;Please Select
+            <option selected value=''>
+              &nbsp;&nbsp;Please Select (0)
             </option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -334,91 +306,22 @@ const Registration = ({ data }: Registration) => {
             <option value='20'>20</option>
           </select>
         </div>
-        {/* <div className='grid xl:flex '>
-          <label htmlFor='select'>Estimated Arrival Date: </label>
-          <i
-            className='bx bx-calendar lg:text-5xl'
-            style={{ color: '#ffffff' }}
-          ></i>
-          <div className='bg-white rounded-md w-full lg:flex lg:justify-between lg:items-center'>
-            <input
-              aria-label='label for arrival date input'
-              type={arrival_field}
-              name='arrival_date'
-              id='arrival_date'
-              min='2024-10-16'
-              value={arrival_date}
-              onChange={(e) => setArrival_date(e.target.value)}
-              onFocus={() => setArrival_field('date')}
-              onBlur={() => setArrival_field('text')}
-              required   
-            />
-            <select
-              aria-label='arrival_date'
-              name='arrival_date'
-              id='arrival_date'
-              value={arrival_date}
-              onChange={(e) => setArrival_date(e.target.value)}
-            >
-              <option value='' hidden disabled>
-                &nbsp;&nbsp;Please Select
-              </option>
-              <option value='10-16-2024'>10-16-2024</option>
-              <option value='10-17-2024'>10-17-2024</option>
-              <option value='10-18-2024'>10-18-2024</option>
-              <option value='10-19-2024'>10-19-2024</option>
-              <option value='10-20-2024'>10-20-2024</option>
-              <option value='10-21-2024'>10-21-2024</option>
-              <option value='10-22-2024'>10-22-2024</option>
-              <option value='10-23-2024'>10-23-2024</option>
-              <option value='10-24-2024'>10-24-2024</option>
-            </select>
-          </div>
-        </div> */}
-        {/* <div className='grid xl:flex'>
-          <label htmlFor='select'>Estimated Departure Date: </label>
 
-          <i
-            className='bx bx-calendar lg:text-5xl'
-            style={{ color: '#ffffff' }}
-          ></i>
-          <div className='bg-white items-center w-full rounded-md lg:rounded-r-md lg:flex lg:justify-between'>
-            <input
-              aria-label='label for departure date input'
-              type={departure_field}
-              name='departure_date'
-              id='departure_date'
-              max='2024-10-25'
-              value={departure_date}
-              onChange={(e) => setDeparture_date(e.target.value)}
-              onFocus={() => setDeparture_field('date')}
-              onBlur={() => setDeparture_field('text')}
-              required
-            />
-            <select
-              aria-label='departure_date'
-              name='departure_date'
-              id='departure_date'
-              value={departure_date}
-              onChange={(e) => setDeparture_date(e.target.value)}
-            >
-              <option value='' hidden disabled>
-                &nbsp;&nbsp;Please Select
-              </option>
-              <option value='10-18-2024'>10-18-2024</option>
-              <option value='10-19-2024'>10-19-2024</option>
-              <option value='10-20-2024'>10-20-2024</option>
-              <option value='10-21-2024'>10-21-2024</option>
-              <option value='10-22-2024'>10-22-2024</option>
-              <option value='10-23-2024'>10-23-2024</option>
-              <option value='10-24-2024'>10-24-2024</option>
-              <option value='10-25-2024'>10-25-2024</option>
-            </select>
-          </div>
-        </div> */}
         <button
           role='link'
-          className='bg-white text-black rounded-md w-3/4 mx-auto py-4 lg:w-full  md:px-2 font-bold mt-6'
+          // className={
+          //   allFieldsUndefined || allFieldsZero
+          //     ?
+          //       'bg-gray-400 text-gray-300 rounded-md w-3/4 mx-auto py-4 lg:w-full md:px-2 font-bold mt-6'
+          //     : 'bg-white text-black rounded-md w-3/4 mx-auto py-4 lg:w-full md:px-2 font-bold mt-6'
+          // }
+          // disabled={allFieldsUndefined || allFieldsZero}
+          className={`rounded-md w-3/4 mx-auto py-4 lg:w-full md:px-2 font-bold mt-6 ${
+            allFieldsUnselected
+              ? 'bg-gray-400 text-gray-300'
+              : 'bg-white text-black'
+          }`}
+          disabled={allFieldsUnselected}
           type='submit'
         >
           CHECKOUT
