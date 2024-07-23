@@ -18,17 +18,7 @@ export default async function handler(req, res, ) {
     try {
       // Create Checkout Sessions from body params.
       let temp;
-      // if( adults === 0 && babies === 0 && children === 0 && seniors === 0){
-      //   disabledCheckout =  true;
-      // } else if 
-      // ( adults === "" && babies === "" && children === "" && seniors === ""){
-      //   disabledCheckout =  true;
-      // } else if
-      console.log(`Before the if ${adults}`);
-      console.log(`Before the if ${children}`);
-      console.log(`Before the if ${babies}`);
-      console.log(`Before the if ${seniors}`);
-      
+     
        if(adults > 0 && children === "" && babies === "" && seniors === ""  ) {
         console.log(`After the if ${adults}`);
         console.log(`After the if ${children}`);
@@ -142,8 +132,8 @@ export default async function handler(req, res, ) {
              },
            ],
            mode: 'payment',
-           success_url: 'https://www.goshengroup.net/en/gatherings',
-          //  success_url: `${req.headers.origin}/?success=true`,
+           success_url: 'https://www.goshengroup.net/en/thanks',
+          //  success_url: 'https://www.goshengroup.net/en/thanks',
 
            cancel_url: `${req.headers.origin}/?canceled=true`,
            automatic_tax: { enabled: false },
@@ -268,7 +258,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -400,7 +390,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -547,7 +537,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -672,7 +662,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -802,7 +792,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -922,7 +912,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1050,7 +1040,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1186,7 +1176,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1315,7 +1305,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1435,7 +1425,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1563,7 +1553,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1699,7 +1689,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1835,7 +1825,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -1955,7 +1945,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -2083,7 +2073,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -2219,7 +2209,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
       });
@@ -2350,7 +2340,7 @@ export default async function handler(req, res, ) {
           },
         ],
         mode: 'payment',
-        success_url: 'https://www.goshengroup.net/en/gatherings',
+        success_url: 'https://www.goshengroup.net/en/thanks',
         // success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
         automatic_tax: { enabled: false },
